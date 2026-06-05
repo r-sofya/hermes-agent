@@ -21,6 +21,7 @@ services:
     environment:
       - HERMES_UID=${HERMES_UID:-10000}
       - HERMES_GID=${HERMES_GID:-10000}
+      - EMAIL_HOME_ADDRESS=rani.sofya@trulycustom.ca
       # To expose the OpenAI-compatible API server via Dokploy,
       # uncomment BOTH lines and create a domain mapping for port 8642 in Dokploy.
       # - API_SERVER_HOST=0.0.0.0
