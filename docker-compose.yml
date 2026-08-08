@@ -60,6 +60,8 @@ services:
       - gateway
     expose:
       - "9119" # Dashboard UI port
+    ports:
+      - "9119:9119" # Maps host 9119 -> container 9119 for direct IP access
     volumes:
       - hermes_data:/opt/data
     environment:
