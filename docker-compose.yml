@@ -28,8 +28,9 @@ services:
     # Dokploy automatically connects this service to `dokploy-network`.
     expose:
       - "8642" # OpenAI-compatible API server port
-      - "8765" # Telephony Voice TWiML HTTP port
-      - "8766" # Telephony Voice Stream WebSocket port
+    ports:
+      - "8765:8765" # Telephony Voice TWiML HTTP port
+      - "8766:8766" # Telephony Voice Stream WebSocket port
     volumes:
       - hermes_data:/opt/data
     environment:
