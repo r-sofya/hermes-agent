@@ -78,6 +78,23 @@ services:
     # 🚨 Crucial Change 3: Bind to 0.0.0.0 (not 127.0.0.1) so Traefik can route traffic into the container.
     command: ["dashboard", "--host", "0.0.0.0", "--no-open", "--insecure"]
 
+  voice-bridge:
+    image: hermes-agent  # reuse base image
+    container_name: voice-bridge
+    restart: unless-stopped
+    expose:
+      - "5000"
+    volumes:
+      - hermes_data:/opt/data
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - PUBLIC_HOST=voice.trulycustom.ca
+    command: >
+      bash -c "
+      pip install fastapi uvicorn faster-whisper edge-tts aiohttp &&
+      python /opt/data/voice-bridge/main.py
+      "
+
 # 🚨 Crucial Change 4: Use a Named Volume for persistent data.
 # This prevents host path ownership conflicts and guarantees data persistence across redeploys in Dokploy.
 volumes:
