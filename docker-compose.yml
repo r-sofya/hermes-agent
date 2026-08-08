@@ -91,8 +91,9 @@ services:
       - PUBLIC_HOST=voice.trulycustom.ca
     command: >
       bash -c "
-      pip install fastapi uvicorn faster-whisper edge-tts aiohttp &&
-      python /opt/data/voice-bridge/main.py
+      pip install faster-whisper edge-tts aiohttp websockets &&
+      python /opt/data/voice-bridge/main.py &
+      exec hermes gateway run
       "
 
 # 🚨 Crucial Change 4: Use a Named Volume for persistent data.
